@@ -4,7 +4,7 @@ import numpy as np
 np.__version__
 
 np?
-#http://www.numpy.org
+http://www.numpy.org
 
 #unlike Python lists, NumPy is constrained to arrays that all contain the same type
 np.array([3.14, 4, 2, 3])
@@ -113,6 +113,7 @@ print(x2[0, :]) # first row of x2
 print(x2[0]) # equivalent to x2[0, :]
 
 #slices are not copies! they are views
+#changing the view chages the data, take and change slices
 print(x2)
 x2_sub = x2[:2, :2]
 print(x2_sub)
@@ -272,7 +273,7 @@ y = np.zeros(10)
 np.power(2, x, out=y[::2])
 print(y)
 
-#outer product
+#outer product -> 
 x = np.arange(1, 6)
 np.multiply.outer(x, x)
 
@@ -379,6 +380,11 @@ M + a[:, np.newaxis] #right padding
 
 #TODO: scale the mean of the following array by column (center and standardize)
 X = np.random.random((10, 3))
+(X-X.mean())/X.std()
+X.mean(axis=0)
+X.std(axis=0)
+scaledX=(X-X.mean(axis=0))/X.std(0)
+
 
 # x and y have 50 steps from 0 to 5
 x = np.linspace(0, 5, 50)
@@ -391,10 +397,12 @@ plt.colorbar();
 
 # use Pandas to extract rainfall inches as a NumPy array
 rainfall = pd.read_csv('Seattle2014.csv')['PRCP'].values
+#take the values of PRECIPITATION
 inches = rainfall / 254 # 1/10mm -> inches
 inches.shape
 plt.hist(inches, 40);
 
+#masking
 # booleans
 x = np.array([1, 2, 3, 4, 5])
 x < 3 # less than
@@ -426,6 +434,7 @@ np.all(x < 8, axis=1)
 
 np.sum((inches > 0.5) & (inches < 1))
 np.sum(~( (inches <= 0.5) | (inches >= 1) ))
+#two are th same, squiggly means NOT
 
 print("Number days without rain:", np.sum(inches == 0))
 print("Number days with rain:", np.sum(inches != 0))
@@ -489,6 +498,7 @@ print(x)
 i = [2, 3, 3, 4, 4, 4]
 x[i] += 1
 x
+#modifying / overrriding
 
 x = np.zeros(10)
 np.add.at(x, i, 1)
@@ -574,6 +584,8 @@ a @ M
 M @ a
 M @ a.reshape(4,1)
 a @ M
+
+#X^T = X', (X'X)^-1X'Y = beta 
 
 # inverse
 
