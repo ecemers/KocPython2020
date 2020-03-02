@@ -386,6 +386,8 @@ X.std(axis=0)
 scaledX=(X-X.mean(axis=0))/X.std(0)
 
 
+scaledX=(X-X.mean(axis=0))/X.std(0)
+
 # x and y have 50 steps from 0 to 5
 x = np.linspace(0, 5, 50)
 y = np.linspace(0, 5, 50)[:, np.newaxis]
@@ -396,6 +398,7 @@ plt.colorbar();
 
 
 # use Pandas to extract rainfall inches as a NumPy array
+import pandas as pd
 rainfall = pd.read_csv('Seattle2014.csv')['PRCP'].values
 #take the values of PRECIPITATION
 inches = rainfall / 254 # 1/10mm -> inches
@@ -496,7 +499,6 @@ x[[0, 0]] = [4, 6]
 print(x)
 
 i = [2, 3, 3, 4, 4, 4]
-x[i] += 1
 x
 #modifying / overrriding
 
